@@ -1,0 +1,81 @@
+/*=================== upload file custom styling ================= */
+.custom-upload {
+	&__input {
+		z-index: 2;
+		margin: 0;
+		opacity: 0;
+	}
+
+	&__label {
+		left: 0;
+		z-index: 1;
+		height: 3.037rem;
+		font-size: 0.875rem;
+		font-weight: 400;
+		border: 1px solid #d1d5db;
+		border-radius: 0.25rem;
+
+		&[data-label] {
+			&:after {
+				content: attr(data-label);
+				background-color: var(--#{$prefix}primary);
+				color: var(--#{$prefix}white);
+				position: absolute;
+				top: 0.25rem;
+				right: 0.313rem;
+				height: 2.375rem;
+				padding: 0.8rem 3rem;
+				line-height: 1.5;
+				border-radius: 0.25rem;
+				display: flex;
+				align-items: center;
+			}
+		}
+	}
+
+	//invalid styling
+	.form-control.is-invalid+label {
+		border-color: var(--#{$prefix}danger);
+		padding-right: calc(1.5em + 1.6rem);
+		background-image: none;
+		background-repeat: no-repeat;
+		background-position: right calc(0.375em + 0.4rem) center;
+		background-size: calc(0.75em + 0.8rem) calc(0.75em + 0.8rem);
+	}
+}
+
+.custom-upload,
+.custom-upload__input {
+	position: relative;
+	width: 100%;
+	height: 3.037rem;
+}
+
+.custom-upload__label,
+.custom-upload__input,
+.custom-upload__label:after {
+	display: block;
+	align-items: center;
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 0.8rem 6.5625rem 0.8rem 0.8rem;
+	line-height: 1.5;
+	color: #52616b;
+}
+
+@media (max-width: 575px) {
+	.custom-upload__label[data-label]:after {
+		padding: 0.8rem 1.25rem;
+	}
+}
+
+
+@media (min-width: 576px) {
+
+	.custom-upload__label,
+	.custom-upload__input,
+	.custom-upload__label:after {
+		padding-right: 10rem;
+	}
+}

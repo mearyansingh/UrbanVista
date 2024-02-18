@@ -1,0 +1,87 @@
+a.text-secondary:focus,
+a.text-secondary:hover {
+	color: $orange !important;
+}
+
+// BODY BG
+.body-bg {
+	background-color: $body-bg;
+}
+
+//Background image
+.bg-style {
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+.pseudo-none {
+
+	&:before,
+	&:after {
+		display: none;
+	}
+}
+
+.mb-last-0:last-child {
+	margin-bottom: 0;
+}
+
+.pb-last-0 {
+	&:last-child {
+		padding-bottom: 0;
+	}
+}
+
+.border-bottom-last-0:last-child {
+	border-bottom: 0;
+}
+
+// Required negative margin classes
+//We did not using default bootstrap because for handful classes we have to add all unnecessary other margin classes with it because it increases the size of style by 33 kb.
+
+.mx-n10 {
+	margin-left: -0.625rem;
+	margin-right: -0.625rem;
+}
+
+.mx-n5 {
+	margin-left: -0.313rem;
+	margin-right: -0.313rem;
+}
+
+.mx-n30 {
+	margin-left: -1.875rem;
+	margin-right: -1.875rem;
+}
+
+.secondary-active {
+	position: relative;
+	padding-left: 2px;
+	padding-right: 2px;
+
+	&:after {
+		content: "";
+		height: 1px;
+		background: $secondary;
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: -4px;
+	}
+}
+
+.disabled-block {
+	opacity: 0.4;
+	cursor: not-allowed;
+}
+
+.focus-none:focus {
+	box-shadow: none;
+	background-color: #efefef;
+}
+
+//Letter spacing
+.letter-spacing-1 {
+	letter-spacing: 1px;
+}

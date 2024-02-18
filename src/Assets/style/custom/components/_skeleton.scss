@@ -1,0 +1,14 @@
+/**Skeleton loader scss */
+.skeleton {
+	animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+	0% {
+		background-color: var(--#{$prefix}skeleton-start-color);
+	}
+
+	100% {
+		background-color: var(--#{$prefix}--#{$prefix}skeleton-end-color);
+	}
+}

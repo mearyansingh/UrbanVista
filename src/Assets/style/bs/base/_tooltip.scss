@@ -1,0 +1,89 @@
+/* =========================== Tooltip ======================================*/
+
+.custom-tooltip {
+	background-color: $tooltip-bg-color;
+	border-radius: $tooltip-bdr-rds;
+	border: 1px solid $tooltip-arrow-before-bdr-color;
+	padding: $tooltip-padding;
+	width: $tooltip-width;
+	box-shadow: $tooltip-shadow;
+	font-size: $tooltip-font-size;
+	color: $tooltip-color;
+	transition: all 0.3s ease;
+	text-transform: none;
+	cursor: default;
+	opacity: 0;
+	font-weight: normal;
+	pointer-events: none;
+	position: absolute;
+	word-wrap: break-word;
+	z-index: 1050;
+	text-align: left;
+	line-height: 1.4;
+	min-width: 3.125rem;
+
+	&::before,
+	&::after {
+		content: "";
+		height: 0;
+		position: absolute;
+		width: 0;
+	}
+
+	&__content {
+		color: $tooltip-color;
+		font-size: $tooltip-font-size;
+		margin-bottom: 0.188rem;
+		line-height: 1.7;
+	}
+
+	&:before,
+	&:after {
+		border: 5px solid transparent;
+	}
+
+	&--active {
+		z-index: 9999;
+		opacity: 1;
+		position: fixed;
+		animation: tooltipFadeUp 0.4s 1 ease;
+	}
+
+	//custom tooltip(used in table header)
+	&-wrap {
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		flex-direction: column;
+		justify-content: center;
+		word-wrap: break-word;
+
+		&:hover>.custom-tooltip {
+			opacity: 1;
+			pointer-events: auto;
+			transform: translate(0);
+		}
+	}
+
+	&--xl {
+		width: 25rem;
+	}
+
+	&--left,
+	&--left-top,
+	&--left-bottom {
+		right: 105%;
+	}
+}
+
+@keyframes tooltipFadeUp {
+	0% {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: none;
+	}
+}

@@ -1,0 +1,106 @@
+/* =========================== Animations ======================================*/
+
+.custom-animate-fadeup {
+	animation-name: fadeUp;
+	animation-duration: 1s;
+}
+
+.custom-animate-fadedown {
+	animation-name: fadeDown;
+	animation-duration: 1s;
+}
+
+.custom-animate-faderight {
+	animation-name: fadeRight;
+	animation-duration: 1s;
+}
+
+.custom-animate-fadeleft {
+	animation-name: fadeLeft;
+	animation-duration: 1s;
+}
+
+//Notify
+.custom-notify {
+	animation: notify 1.5s infinite linear;
+	border-radius: 50%;
+	line-height: normal;
+}
+
+/**============ Animation Keyframe ===========*/
+@keyframes fadeUp {
+	0% {
+		opacity: 0.2;
+		transform: translateY(20px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0.2;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeDown {
+	0% {
+		opacity: 0.2;
+		transform: translateY(-20px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+@keyframes fadeLeft {
+	0% {
+		opacity: 0.2;
+		transform: translateX(-40px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateX(0px);
+	}
+}
+
+@keyframes fadeRight {
+	0% {
+		opacity: 0.2;
+		transform: translateX(40px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateX(0px);
+	}
+}
+
+@keyframes notify {
+	0% {
+		box-shadow: 0 0 0 0 rgba($success, 0.8);
+	}
+
+	70% {
+		box-shadow: 0 0 0 20px rgba($success, 0);
+	}
+
+	100% {
+		box-shadow: 0 0 0 0 rgba($success, 0);
+	}
+}
+
+//Transitions
+.custom-transition {
+	@include transition(all 0.3s ease-in-out);
+}

@@ -1,0 +1,177 @@
+/*=================== Important classes =========================*/
+
+/**display**/
+.d-block-imp {
+	display: block !important;
+}
+
+/**text**/
+.text-secondary-imp {
+	color: var(--#{$prefix}secondary) !important;
+}
+
+/* =========================== Border important classes ======================================*/
+.border-imp {
+	border: 1px solid $border-color !important;
+}
+
+.border-0-imp {
+	border: 0 !important;
+}
+
+.border-danger-imp {
+	border: 1px solid var(--#{$prefix}danger) !important;
+}
+
+.border-bottom-imp {
+	border-bottom: 1px solid var(--#{$prefix}gray-300) !important;
+}
+
+/* =========================== Flexbox important classes ======================================*/
+@media (min-width: 576px) {
+	.justify-content-sm-end-imp {
+		justify-content: flex-end !important;
+	}
+}
+
+.align-items-start-imp {
+	align-items: flex-start !important;
+}
+
+/* =========================== Spacing important classes ======================================*/
+//margin
+.mb-0-imp {
+	margin-bottom: 0 !important;
+}
+
+.mb-5-imp {
+	margin-bottom: .3125rem !important;
+}
+
+.mb-10-imp {
+	margin-bottom: .625rem !important;
+}
+
+.mb-15-imp {
+	margin-bottom: .9375rem !important;
+}
+
+.mb-20-imp {
+	margin-bottom: 1.25rem !important;
+}
+
+.mb-30-imp {
+	margin-bottom: 1.875rem !important;
+}
+
+//padding
+.p-0-imp {
+	padding: 0 !important;
+}
+
+.pb-0-imp {
+	padding-bottom: 0 !important;
+}
+
+.pt-0-imp {
+	padding-top: 0 !important;
+}
+
+.px-0-imp {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+
+.pb-5-imp {
+	padding-bottom: 0.3125rem !important;
+}
+
+.pt-5-imp {
+	padding-top: 0.3125rem !important;
+}
+
+.pb-10-imp {
+	padding-bottom: 0.625rem !important;
+}
+
+.p-10-imp {
+	padding: 0.625rem !important;
+}
+
+.px-15-imp {
+	padding-left: 0.938rem !important;
+	padding-right: 0.938rem !important;
+}
+
+.py-15-imp {
+	padding-left: 0.938rem !important;
+	padding-right: 0.938rem !important;
+}
+
+.px-20-imp {
+	padding-left: 1.25rem !important;
+	padding-right: 1.25rem !important;
+}
+
+.ps-15-imp {
+	padding-left: 0.938rem !important;
+}
+
+.py-10-imp {
+	padding-top: 0.625rem !important;
+	padding-bottom: 0.625rem !important;
+}
+
+.pe-0-imp {
+	padding-right: 0 !important;
+}
+
+.pt-30-imp {
+	padding-top: 1.875rem !important;
+}
+
+/* =========================== width important classes ======================================*/
+.w-100-imp {
+	width: 100% !important;
+}
+
+.mh-auto-imp {
+	min-height: auto !important;
+}
+
+/* =========================== Font important classes ======================================*/
+.fw-bold-imp {
+	font-weight: bold !important;
+}
+
+/* =========================== Color important classes ======================================*/
+.bg-white-imp {
+	background-color: var(--#{$prefix}white) !important;
+}
+
+.bg-primary-imp {
+	background-color: var(--#{$prefix}primary) !important;
+}
+
+.text-white-imp {
+	color: var(--#{$prefix}white) !important;
+}
+
+.text-dark-imp {
+	color: var(--#{$prefix}dark) !important;
+}
+
+/* =========================== Rounded important classes ======================================*/
+.rounded-0-imp {
+	border-radius: 0 !important;
+}
+
+/**overflow**/
+.overflow-hidden-imp {
+	overflow: hidden !important;
+}
+
+/**position**/
+.position-fixed-imp {
+	position: fixed !important;
+}

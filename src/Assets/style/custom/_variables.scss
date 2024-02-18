@@ -1,0 +1,12 @@
+/* ========= Skeleton Loader ========= */
+
+$skeleton-start-color: hsl(200, 20%, 80%);
+$skeleton-end-color: hsl(200, 20%, 95%);
+
+/* ========= root selector variable for dark mode ========= */
+
+:root {
+	/* ========= Skeleton loader ========== */
+	--#{$prefix}skeleton-start-color: #{$skeleton-start-color};
+	--#{$prefix}skeleton-end-color: #{$skeleton-end-color};
+}

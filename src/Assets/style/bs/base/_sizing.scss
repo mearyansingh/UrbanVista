@@ -1,0 +1,77 @@
+/* =========================== Sizing ======================================*/
+
+//Height classes in pixels
+.h-49px {
+	height: 49px;
+}
+
+.h-100px {
+	height: 100px;
+}
+
+.h-150px {
+	height: 150px;
+}
+
+.h-200px {
+	height: 200px;
+}
+
+@include media-breakpoint-down(sm) {
+	.w-100-sm {
+		width: 100%;
+	}
+}
+
+@include media-breakpoint-down(md) {
+	.w-100-md {
+		width: 100%;
+	}
+}
+
+.min-height-auto {
+	min-height: auto;
+}
+
+.w-100-px {
+	width: 100px;
+}
+
+.w-200-px {
+	width: 200px;
+}
+
+.w-60-px {
+	width: 60px;
+}
+
+.w-5 {
+	width: 5%;
+}
+
+//width
+.w-112px {
+	width: 112px;
+}
+
+.w-38px {
+	width: 38px;
+}
+
+/**width custom classes**/
+.h-58px {
+	height: 58px;
+}
+
+.h-50-px {
+	height: 50px;
+}
+
+.h-48-px {
+	height: 48px;
+}
+
+//used in create customer canvas
+.mb-86px {
+	margin-bottom: 86px;
+}

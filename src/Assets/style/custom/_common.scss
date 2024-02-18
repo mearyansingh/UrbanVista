@@ -1,0 +1,232 @@
+/* =========Common Styling ========== */
+
+@media (max-width: 1367px) {
+	html {
+		font-size: 16px;
+	}
+}
+
+body,
+html {
+	// -webkit-tap-highlight-color: transparent;
+	// -webkit-text-size-adjust: 100%;
+	-webkit-touch-callout: none;
+	-ms-text-size-adjust: 100%;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	-webkit-overflow-scrolling: touch;
+	// background-color: $body-bg;
+	@extend .custom-scrollbar;
+}
+
+img {
+	height: auto;
+	max-width: 100%;
+}
+
+a {
+	transition: all 0.4s ease 0s;
+	display: inline-block;
+
+	// --#{$prefix}link-color-rgb: var(--#{$prefix}dark-rgb);
+	// --#{$prefix}link-hover-color-rgb: var(--#{$prefix}primary-rgb);
+
+	// &:hover {
+	// 	color: var(--#{$prefix}primary);
+	// 	text-decoration: none !important;
+	// }
+}
+
+/**class for underline**/
+.text-hover-underline:hover {
+	text-decoration: underline;
+}
+
+*::-moz-selection {
+	background-color: var(--#{$prefix}primary);
+	color: var(--#{$prefix}white);
+}
+
+//Tooltip
+.tooltip-inner {
+	box-shadow: $tooltip-shadow;
+	// border: 1px solid $tooltip-arrow-before-bdr-color;
+	// border-radius: $tooltip-bdr-rds;
+}
+
+//toaster
+.Toastify__toast {
+	border-radius: 0.25rem;
+	font-family: inherit;
+
+	&--success {
+		background: var(--#{$prefix}success);
+	}
+
+	&--error {
+		background: var(--#{$prefix}danger);
+	}
+
+	&--warning {
+		background: var(--#{$prefix}warning);
+	}
+
+	&--info {
+		background: var(--#{$prefix}info);
+	}
+
+	&-body {
+		font-weight: $font-weight-semibold;
+		color: var(--#{$prefix}white);
+		word-break: break-word;
+	}
+}
+
+.Toastify__toast-icon svg[fill],
+.Toastify__close-button {
+	fill: var(--#{$prefix}white);
+	color: var(--#{$prefix}white);
+}
+
+.overflow-x-hidden {
+	overflow-x: hidden;
+}
+
+/* ===========================Common (Global style)======================================*/
+
+/**custom style text hover primary**/
+.text-hover--primary:hover {
+	color: var(--#{$prefix}primary);
+}
+
+.list-hover--primary {
+	&:hover * {
+		color: var(--#{$prefix}primary);
+	}
+}
+
+/**Capitalize first letter**/
+.txt-capitalize {
+	display: inline-block;
+
+	&:first-letter {
+		text-transform: capitalize;
+	}
+
+	text-transform: lowercase;
+}
+
+//Loader
+.custom-loader--v2 {
+	z-index: 1060;
+}
+
+.custom-shadow {
+	box-shadow: 1px 0 5px rgba(82, 97, 107, 0.1);
+}
+
+/* ===========================My style======================================*/
+
+.swiper-container {
+	min-height: 225px;
+	height: 23vw;
+}
+
+.swiper-pagination-bullet-active {
+	background-color: #ffffff !important;
+}
+
+.swiperSlideDiv {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.swiperSlideImg {
+	width: 100%;
+	object-fit: cover;
+}
+
+.swiperSlideText {
+	color: #ffffff;
+	position: absolute;
+	top: 70px;
+	left: 0;
+	font-weight: 600;
+	max-width: 90%;
+	font-size: 1.25rem;
+	background-color: rgba(0, 0, 0, 0.8);
+	padding: 0.5rem;
+}
+
+.linkCopied {
+	position: fixed;
+	top: 9%;
+	right: 5%;
+	z-index: 2;
+	background-color: #ffffff;
+	border-radius: 1rem;
+	padding: 0.5rem 1rem;
+	font-weight: 600;
+}
+
+.swiper {
+	min-height: 225px;
+	height: 23vw;
+}
+
+.swiper-slide img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+@media (min-width: 768px) {
+	.card .card-img-overlay {
+		opacity: 0;
+	}
+}
+
+.card .card-img-overlay {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background-attachment: fixed;
+	transition: all 0.3s ease-in-out;
+	background-color: rgba(0, 0, 0, 0.5);
+
+}
+
+.card .card-img-overlay:hover {
+	opacity: 1;
+
+}
+
+.overlay-img {
+	transition: transform 0.3s ease-in-out;
+}
+
+.card:hover .overlay-img {
+	transform: scale(1.1);
+	/* You can adjust the scale factor as per your preference */
+}
+
+.card {
+	&.category-card {
+		transition: all 0.3s ease-in-out;
+
+		&:hover {
+			box-shadow: rgba(42, 42, 44, 0.2) 0px 7px 29px 0px;
+			-webkit-transform: translateY(-4px);
+			transform: translateY(-4px);
+		}
+	}
+}

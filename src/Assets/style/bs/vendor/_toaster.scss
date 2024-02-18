@@ -1,0 +1,47 @@
+.toast-container {
+	pointer-events: none;
+	position: fixed;
+	z-index: 999999;
+	top:10px;
+	right: 10px;
+	@include media-breakpoint-down(sm){
+		right: auto;
+		width: 100%;
+		left: auto;
+		padding: 0 10px;
+	}
+	.ngx-toastr {
+		padding: 1.2rem 1.4rem;
+		display: flex;
+		width: 450px !important;
+		@include media-breakpoint-down(sm){
+			width: 100% !important;
+		}
+		flex-direction: row-reverse;
+		align-items: center;
+		border-radius: 15px;
+		justify-content: space-between;
+		background-image: none;
+		&.toast-error{background-color: $danger;}
+		&.toast-success{background-color: $success;}
+		&.toast-info{background-color: $primary;}
+		&.toast-warning{background-color: $secondary;}
+		&:hover{box-shadow: $box-shadow-sm;}
+	}
+
+	.toast-close-button {
+		text-shadow: none;
+		&:hover{color: $white;}
+		&:before {
+			content: "\F659";
+			display: inline-block;
+			font-family: bootstrap-icons;
+			font-style: normal;
+			font-weight: 400;
+			top: 5px;
+			position: relative;
+		}
+		span {display: none;}
+	}
+	.toast-message {font-size: 1.125rem;}
+}

@@ -1,0 +1,39 @@
+//
+// Override variables and utilities of bootstrap
+//
+@import "bs/helper/bootstrap";
+
+//
+// bootstrap Variables
+//
+@import "bs/base/bs-variables";
+
+//
+// Themes files has dark and other color schemes
+//
+@import "bs/theme/theme";
+
+//
+// Base files including mixins and all base elements of bootstrap like cards,buttons etc
+//
+@import "bs/base/base";
+
+//
+// Layouts files consists header,sidebar and content structure files
+//
+// @import "bs/layout/layout";
+
+//
+// Component basically has calendar,editor,rating etc.
+//
+// @import "bs/component/component";
+
+//
+// Vendor - Third Party Apps
+//
+@import "bs/vendor/vendor";
+
+//
+// Other admin apps style(Provider,campaigns, etc.)
+//
+@import "custom/custom";

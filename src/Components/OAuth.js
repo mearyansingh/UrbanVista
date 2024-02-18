@@ -5,9 +5,9 @@ import {
 	getAuth, signInWithPopup, GoogleAuthProvider
 } from "firebase/auth";
 import { doc, setDoc, getDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "../firebase.config";
+import { db } from "firebase.config";
 import { toast } from "react-toastify";
-import googleIcon from "../assets/svg/googleIcon.svg";
+import googleIcon from "Assets/images/svg/googleIcon.svg";
 
 function OAuth() {
 
@@ -43,17 +43,18 @@ function OAuth() {
 
 	return (
 		<>
-			<div className="text-center d-block mb-4">
-				<p className="mb-2">
+			<div className="d-flex gap-10 flex-column align-items-center justify-content-center">
+				<p className="mb-0 text-body-secondary">
 					Sign {location.pathname === "/sign-up" ? "up" : "in"} with
 				</p>
 				<Button
 					onClick={onGoogleClick}
-					className="rounded-circle"
+					className="rounded-circle d-flex align-items-center justify-content-center "
 					variant="light"
 					size="sm"
+					style={{ width: "50px", height: "50px" }}
 				>
-					<Image fluid src={googleIcon} width={15} height={15} alt="google" />
+					<Image fluid src={googleIcon} width={35} height={35} alt="google" />
 				</Button>
 			</div>
 		</>

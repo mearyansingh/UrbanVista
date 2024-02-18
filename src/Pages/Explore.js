@@ -1,54 +1,46 @@
 import React from "react";
-import { Container, Image, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import rentCategoryImage from "../assets/jpg/rentCategoryImage.jpg";
-import sellCategoryImage from "../assets/jpg/sellCategoryImage.jpg";
+import { Container, Row, Col, Card } from "react-bootstrap";
+import Slider from "Components/Slider";
+import rentCategoryImage from "Assets/images/rentCategoryImage.jpg";
+import sellCategoryImage from "Assets/images/sellCategoryImage.jpg";
+import Header from "Components/LayoutComponents/Header";
+import SEO from "Components/SEO";
 
 function Explore() {
+
 	return (
 		<>
-			<header className="py-4 bg-light">
-				<Container>
-					<h1 className="mb-0 lh-1">Explore</h1>
-				</Container>
-			</header>
-			<main className="py-5">
+			<SEO title="Explore | UrbanVista" />
+			<Header>
+				<h2 className="mb-0">Explore</h2>
+			</Header >
+			<main className="flex-grow-1 pt-15 mb-60 pb-40 ">
 				<Container>
 					{/* {Slider} */}
-					<h5>Categories</h5>
-					<Row>
-						<Col>
-							<Link to="/category/rent" className="text-decoration-none">
-								<Image
-									src={rentCategoryImage}
-									fluid
-									height={300}
-									width={800}
-									alt="rent"
-									className="rounded"
-									style={{ minHeight: '115px', height: '15vw', objectFit: 'cover' }}
-								/>
-								<p>Places for rent</p>
-							</Link>
+					<Slider />
+					<p className='fw-semibold fs-18 mt-30'>Categories</p>
+					<Row className="g-30 custom-animate-fadeup">
+						<Col sm="6">
+							<Card as={Link} to="/category/rent" className="overflow-hidden bg-dark text-white h-100 shadow-sm">
+								<Card.Img src={rentCategoryImage} alt="rent" className="overlay-img object-fit-cover h-100" />
+								<Card.ImgOverlay className="d-flex align-items-center justify-content-center" >
+									<Card.Title as="p" className="fs-24">Places for rent</Card.Title>
+								</Card.ImgOverlay>
+							</Card>
 						</Col>
-						<Col>
-							<Link to="/category/sell" className="text-decoration-none">
-								<Image
-									src={sellCategoryImage}
-									fluid
-									height={300}
-									width={800}
-									alt="sell"
-									className="rounded"
-									style={{ minHeight: '115px', height: '15vw', objectFit: 'cover' }}
-								/>
-								<p>Places for sell</p>
-							</Link>
+						<Col sm="6">
+							<Card as={Link} to="/category/sell" className="overflow-hidden bg-dark text-white h-100 shadow-sm">
+								<Card.Img src={sellCategoryImage} alt="sell" className="overlay-img object-fit-cover h-100" />
+								<Card.ImgOverlay className="d-flex align-items-center justify-content-center" >
+									<Card.Title as="p" className="fs-24">Places for sell</Card.Title>
+								</Card.ImgOverlay>
+							</Card>
 						</Col>
 					</Row>
 				</Container>
 			</main>
-		</>
+		</ >
 	);
 }
 

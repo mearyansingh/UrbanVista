@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import { Image, Container, Card, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { Image, Container, Card, Row, Col, Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { db } from "../firebase.config";
 import {
@@ -12,17 +12,20 @@ import {
 	limit,
 	startAfter,
 } from "firebase/firestore";
-import Spinner from "../Components/Spinners";
-import { ReactComponent as DeleteIcon } from "../assets/svg/deleteIcon.svg";
-import bedIcon from "../assets/svg/bedIcon.svg";
-import bathtubIcon from "../assets/svg/bathtubIcon.svg";
+import bedIcon from "Assets/images/svg/bedIcon.svg";
+import bathtubIcon from "Assets/images/svg/bathtubIcon.svg";
+import { ListEmptyPlaceholder, Loader } from "Components/GlobalComponents";
+import Header from "Components/LayoutComponents/Header";
+import SEO from "Components/SEO";
 
 function Offers() {
+	/**initial state */
 	const [listings, setListings] = useState(null);
 	const [loading, setLoading] = useState(true);
+	const [lastFetchedListing, setLastFetchedListing] = useState(null) //for pagination/load more
 
-	const params = useParams();
 
+	/**lifecycle hook */
 	useEffect(() => {
 		const fetchListings = async () => {
 			try {
@@ -39,6 +42,9 @@ function Offers() {
 
 				//execute query
 				const querySnap = await getDocs(q);
+				//for load more
+				const lastVisible = querySnap.docs[querySnap.docs.length - 1]
+				setLastFetchedListing(lastVisible)
 
 				const listings = [];
 
@@ -58,83 +64,114 @@ function Offers() {
 		};
 		fetchListings();
 	}, []);
-	console.log(listings, "listings");
+
+	/**Pagination / Load more */
+	const onFetchMoreListings = async () => {
+		try {
+			//Get reference
+			const listingRef = collection(db, "listings");
+			//create a query
+			const q = query(
+				listingRef,
+				where("offer", "==", true),
+				orderBy("timestamp", "desc"),
+				startAfter(lastFetchedListing),
+				limit(10)
+			);
+			//execute query
+			const querySnap = await getDocs(q);
+
+			const lastVisible = querySnap.docs[querySnap.docs.length - 1]
+			setLastFetchedListing(lastVisible)
+
+			const listings = [];
+			querySnap.forEach((doc) => {
+				return listings.push({
+					id: doc?.id,
+					data: doc?.data(),
+				});
+			});
+			setListings((prevState) => [...prevState, ...listings]);
+			setLoading(false);
+		} catch (error) {
+			console.log(error, "error")
+			toast.error("Could not fetch listings");
+			setLoading(false);
+		}
+	};
+
+	if (loading) {
+		return <Loader loading />;
+	}
 
 	return (
-		<div className="d-flex flex-column" style={{ height: "100vh" }}>
-			<header className="py-4 bg-light">
+		<>
+			<SEO title="Offers | UrbanVista" />
+			<Header>
+				<h2 className="mb-0">Offers</h2>
+			</Header>
+			<main className="flex-grow-1 pt-15 mb-60 pb-40">
 				<Container>
-					<h1 className="mb-0 lh-1">Offers</h1>
+					{listings?.length > 0 ? (
+						<>
+							<Row className="g-20">
+								{listings && listings?.map(listing => (
+									<Col md={6} lg={4} key={listing.id}>
+										<Card as={Link} to={`/category/${listing.data.type}/${listing?.id}`} className="overflow-hidden shadow-sm h-100">
+											<Card.Img variant="top" className="object-fit-cover h-100" src={listing?.data?.imgUrls[0]} alt={listing?.data?.name} />
+											<Card.Body>
+												<p className="fw-bold mb-5">{listing.data.name}</p>
+												<small className="mb-0 d-block mb-5">{listing.data.location}</small>
+												<small className="d-block mb-5">
+													Rs.&nbsp;
+													{listing.data.offer
+														? listing.data.discountedPrice
+															.toString()
+															.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+														: listing.data.regularPrice
+															.toString()
+															.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+													{listing.data.type === "rent" && " / Month"}
+												</small>
+												<div className="d-flex align-items-center gap-15">
+													<div className="d-flex align-items-center">
+														<Image fluid src={bedIcon} alt="Bedroom_img" width={30} height={30} />
+														<small className="ps-1 mb-0">
+															{listing.data.bedrooms > 1
+																? `${listing.data.bedrooms} Bedrooms`
+																: "1 Bedroom"}
+														</small>
+													</div>
+													<div className="d-flex align-items-center ">
+														<Image src={bathtubIcon} alt="Bathroom_img" width={30} height={30} />
+														<small className="ps-1 mb-0">
+															{listing.data.bathrooms > 1
+																? `${listing.data.bathrooms} Bathrooms`
+																: "1 Bathroom"}
+														</small>
+													</div>
+												</div>
+											</Card.Body>
+										</Card>
+									</Col>))}
+							</Row>
+							{lastFetchedListing &&
+								<Button variant="primary" type="button" className="mx-auto d-block mt-30" onClick={onFetchMoreListings}>Load More</Button>
+							}
+						</>
+					)
+						:
+						<Card className="custom-animate-fadeup">
+							<Card.Body>
+								<ListEmptyPlaceholder message="There are no current offers." contentWrapperClass="w-100-md px-30 px-md-0 w-50 mx-md-auto" />
+							</Card.Body>
+						</Card>
+					}
 				</Container>
-			</header>
-			{loading ? (
-				<Spinner />
-			) : listings && listings?.length > 0 ? (
-				<main className="py-5">
-					<Container>
-						<Row>
-							{listings && listings?.map(listing => (
-								<Col md={6} key={listing.id}>
-									<Card as={Link} to={`/category/${listing.data.type}/${listing?.id}`} className="overflow-hidden shadow-sm text-decoration-none">
-										<Row className="g-0">
-											<Col>
-												<Image
-													fluid
-													src={listing?.data?.imgUrls?.[0]}
-													alt={listing?.data?.name}
-													width={500}
-													height={300}
-												/>
-											</Col>
-											<Col>
-												<Card className="border-0 h-100 text-secondary">
-													<Card.Body>
-														<div>
-															<p>{listing.data.location}</p>
-															<p>{listing.data.name}</p>
-															<p>
-																$
-																{listing.data.offer
-																	? listing.data.discountedPrice
-																		.toString()
-																		.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-																	: listing.data.regularPrice
-																		.toString()
-																		.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-																{listing.data.type === "rent" && " / Month"}
-															</p>
-															<div className="d-flex justify-content-between ">
-																<div className="d-flex align-items-center">
-																	<Image fluid src={bedIcon} alt="Bedroom_img" width={30} height={30} />
-																	<p className="ps-1 mb-0">
-																		{listing.data.bedrooms > 1
-																			? `${listing.data.bedrooms} Bedrooms`
-																			: "1 Bedroom"}
-																	</p>
-																</div>
-																<div className="d-flex ">
-																	<Image src={bathtubIcon} alt="Bathroom_img" width={30} height={30} />
-																	<p className="ps-1 mb-0">
-																		{listing.data.bathrooms > 1
-																			? `${listing.data.bathrooms} Bathrooms`
-																			: "1 Bathroom"}
-																	</p>
-																</div>
-															</div>
-														</div>
-													</Card.Body>
-												</Card>
-											</Col>
-										</Row>
-									</Card>
-								</Col>))}
-						</Row>
-					</Container>
-				</main>
-			) : (
-				<p>There are no current offers.</p>
-			)}
-		</div>
+
+			</main>
+
+		</>
 	);
 }
 export default Offers;

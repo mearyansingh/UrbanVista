@@ -1,0 +1,22 @@
+/* =========================== Scrollbar ======================================*/
+
+.custom-scrollbar {
+	&::-webkit-scrollbar {
+		height: $scrollbar-height;
+		width: $scrollbar-width;
+	}
+
+	&::-webkit-scrollbar-track {
+		border-radius: $scrollbar-border-radius;
+		background-color: $scrollbar-track-bg-color;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		border-radius: $scrollbar-border-radius;
+		background-color: $scrollbar-thumb-bg-color;
+	}
+
+	scrollbar-color: $scrollbar-thumb-bg-color $scrollbar-track-bg-color;
+	scrollbar-width: thin;
+	-webkit-overflow-scrolling: touch;
+}

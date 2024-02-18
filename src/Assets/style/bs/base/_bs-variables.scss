@@ -1,0 +1,43 @@
+/* ========= Variables ========== */
+
+//Scrollbar
+$scrollbar-width: 7px;
+$scrollbar-height: 7px;
+$scrollbar-border-radius: 10px;
+$scrollbar-track-bg-color: hsla(0, 0%, 87%, 0.75);
+$scrollbar-thumb-bg-color: rgba(0, 0, 0, 0.18);
+
+//Popups
+$custom-popup-header-bg: $body-bg;
+$custom-popup-header-padding: 0.9375rem 1.5625rem 0.625rem 1.5625rem;
+$custom-popup-content-bg: $modal-content-bg;
+$custom-popup-content-padding: 1.25rem 1.5625rem;
+$custom-popup-footer-bg: $body-bg;
+$custom-popup-footer-padding: 0.9375rem 1.5625rem;
+$custom-popup-footer-top-bdr: 2px solid $gray-100;
+$custom-popup-title-spacing: 1.25rem 1.875rem;
+$custom-popup-border-radius: 3px;
+
+//Table variables
+$table-heading-padding: 0.625rem 1.25rem;
+$table-heading-font-size: 0.875rem;
+$table-heading-font-weight: bold;
+$table-heading-line-height: 100%;
+$table-col-padding: 1.25rem;
+$table-row-box-shadow: 0 4px 26px rgba(82, 97, 107, 0.2);
+$table-row-res-padding: 1rem;
+$table-row-res-border-radius: 0.325rem;
+$table-border-radius: 5px;
+$table-max-height: 30rem;
+
+// Tooltips variables
+$tooltip-bg-color: $white;
+$tooltip-color: $gray-900;
+$tooltip-font-size: 0.813rem;
+$tooltip-shadow: 0 4px 26px rgba(82, 97, 107, 0.2);
+$tooltip-padding: 0.625rem;
+$tooltip-width: 11.25rem;
+$tooltip-bdr-rds: 4px;
+$tooltip-arrow-before-bdr-color: $border-color;
+$tooltip-arrow-after-bdr-color: $white;
+$tooltip-arrow-dark-bdr-color: #2b4d66;

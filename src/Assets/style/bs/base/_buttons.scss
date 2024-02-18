@@ -1,0 +1,114 @@
+/*=================== Button styling =========================*/
+//Button opacity variant
+@each $color,
+$value in $theme-colors {
+	.btn-opacity-#{$color} {
+		@include button-opacity-variant($value);
+	}
+
+	.text-#{$color}-hover:hover {
+		color: $value;
+	}
+
+	.bg-opacity-#{$color} {
+		background-color: rgba($value, 0.2);
+	}
+}
+
+.btn-xs {
+	padding: 0.5rem 0.625rem;
+	border-radius: 0.25rem;
+}
+
+//Border Transparent
+
+.border-transparent,
+.border-transparent:active,
+.border-transparent:focus,
+.border-transparent:hover {
+	border-color: transparent;
+}
+
+//white btn
+.btn-white {
+	--#{$prefix}btn-color: #{$gray-900};
+	--#{$prefix}btn-bg: #{$white};
+	--#{$prefix}btn-border-color: transparent;
+	--#{$prefix}btn-hover-color: #{$gray-800};
+	--#{$prefix}btn-hover-bg: #{$white};
+	--#{$prefix}btn-hover-border-color: transparent;
+	--#{$prefix}btn-focus-shadow-rgb: 217, 217, 217;
+	--#{$prefix}btn-active-color: #{$gray-800};
+	--#{$prefix}btn-active-bg: #{$white};
+	--#{$prefix}btn-active-border-color: transparent;
+	--#{$prefix}btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+	--#{$prefix}btn-disabled-color: #{$gray-600};
+	--#{$prefix}btn-disabled-bg: #{$white};
+	--#{$prefix}btn-disabled-border-color: transparent;
+}
+
+//light btn
+.btn-light {
+	--#{$prefix}btn-color: #{$gray-900};
+	--#{$prefix}btn-border-color: transparent;
+	--#{$prefix}btn-hover-color: #{$gray-800};
+	--#{$prefix}btn-hover-bg: #{$gray-100};
+	--#{$prefix}btn-active-bg: #{$gray-100};
+	--#{$prefix}btn-hover-border-color: transparent;
+	--#{$prefix}btn-active-color: #{$gray-800};
+	--#{$prefix}btn-active-border-color: transparent;
+	--#{$prefix}btn-disabled-color: #{$gray-600};
+	--#{$prefix}btn-disabled-border-color: transparent;
+}
+
+//form select btn
+.btn.form-select {
+	--#{$prefix}btn-color: #{$form-select-color};
+	--#{$prefix}btn-hover-color: #{$form-select-color};
+	--#{$prefix}btn-active-color: #{$form-select-color};
+	--#{$prefix}btn-border-color: #{$form-select-border-color};
+	--#{$prefix}btn-hover-border-color: #{$form-select-border-color};
+	--#{$prefix}btn-active-border-color: #{$form-select-border-color};
+	--#{$prefix}btn-padding-x: #{$form-select-padding-x};
+	--#{$prefix}btn-padding-y: #{$form-select-padding-y};
+	--#{$prefix}btn-font-weight: #{$form-select-font-weight};
+	--#{$prefix}btn-line-height: #{$form-select-line-height};
+	display: flex;
+	align-items: center;
+	text-align: left;
+	padding-right: $form-select-padding-x * 2.25;
+
+	&-sm {
+		--#{$prefix}btn-padding-x: #{$form-select-padding-x-sm};
+		--#{$prefix}btn-padding-y: #{$form-select-padding-y-sm};
+		--#{$prefix}btn-font-size: #{$form-select-font-size-sm};
+	}
+
+	&:disabled {
+		--#{$prefix}btn-disabled-border-color: #{$form-select-border-color};
+		--#{$prefix}btn-disabled-bg: #{$gray-200};
+		--#{$prefix}btn-disabled-color: #{$form-select-color};
+		--#{$prefix}btn-disabled-opacity: 1;
+	}
+
+	&:after {
+		display: none;
+	}
+}
+
+/**btn link **/
+.btn-link {
+	padding: 0;
+}
+
+/** btn white styling **/
+.btn-white:not(.btn-white-link) {
+	border: 2px solid $border-color;
+	color: $headings-color;
+}
+
+.btn-white:hover,
+.btn-white:focus:not(.btn-white-link) {
+	background: #f4f5f5;
+	border-color: $border-color;
+}

@@ -1,0 +1,60 @@
+/* =========================== Loader ======================================*/
+
+.custom-loader {
+	&--v2 {
+		background-color: rgba(255, 255, 255, 0.8);
+		padding: 1rem;
+		z-index: 999;
+		animation: opacity 1s;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		text-align: center;
+
+		.loader {
+			width: 60px;
+			height: 60px;
+			position: relative;
+
+			.dot {
+				width: 10px;
+				height: 10px;
+				background: var(--#{$prefix}primary);
+				border-radius: 50%;
+				position: absolute;
+				top: calc(50% - 5px);
+
+				&.dot1 {
+					left: 0;
+					animation: dot-jump 0.5s cubic-bezier(0.77, 0.47, 0.64, 0.28) alternate infinite;
+				}
+
+				&.dot2 {
+					left: 20px;
+					animation: dot-jump 0.5s 0.2s cubic-bezier(0.77, 0.47, 0.64, 0.28) alternate infinite;
+				}
+
+				&.dot3 {
+					left: 40px;
+					animation: dot-jump 0.5s 0.4s cubic-bezier(0.77, 0.47, 0.64, 0.28) alternate infinite;
+				}
+			}
+		}
+	}
+}
+
+@keyframes dot-jump {
+	0% {
+		transform: translateY(0);
+	}
+
+	100% {
+		transform: translateY(-15px);
+	}
+}

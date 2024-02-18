@@ -1,0 +1,150 @@
+/* =========================== Popup styling ======================================*/
+
+.custom-popup {
+	overflow: hidden;
+	max-width: 100%;
+
+	&__header {
+		padding: $custom-popup-header-padding;
+		align-items: center;
+
+		@include media-breakpoint-down(md) {
+			padding: 1rem;
+		}
+	}
+
+	&__title {
+		@include media-breakpoint-down(sm) {
+			font-size: 1.25rem;
+		}
+	}
+
+	&__content {
+		padding: $custom-popup-content-padding;
+		overflow-x: hidden;
+		@extend .custom-scrollbar;
+		max-height: 60vh;
+
+		@include media-breakpoint-down(sm) {
+			padding: 1rem;
+		}
+	}
+
+	&__footer {
+		padding: $custom-popup-footer-padding;
+
+		@include media-breakpoint-down(sm) {
+			padding: 1rem;
+
+			button {
+				width: 100%;
+			}
+		}
+	}
+
+	//popup Icon styling
+	&__icon {
+		height: 45px;
+		width: 45px;
+	}
+
+	&__icon--danger {
+		color: var(--#{$prefix}danger);
+		background-color: #fed4d4;
+	}
+
+	&__icon--success {
+		background-color: rgba(13, 196, 154, 0.2);
+		color: var(--#{$prefix}success);
+	}
+
+	// popup width variation style
+	&--default {
+		width: 620px;
+	}
+
+	&--sm {
+		width: $modal-sm;
+	}
+
+	&--md {
+		width: $modal-md;
+	}
+
+	&--lg {
+		width: $modal-lg;
+	}
+
+	&--xl {
+		width: $modal-xl;
+	}
+
+	&__closed {
+		@extend .btn-close;
+		opacity: 1;
+
+		&:focus {
+			box-shadow: none;
+		}
+	}
+
+	/** Responsive **/
+	/** Large devices **/
+	@media only screen and (max-width: 1440px) and (min-width: 1201px) {
+
+		&--xl,
+		&--lg {
+			width: 56.25rem;
+		}
+	}
+
+	/** Medium devices **/
+	@media only screen and (max-width: 1200px) and (min-width: 992px) {
+
+		&--xl,
+		&--lg,
+		&--md {
+			width: 49rem;
+		}
+	}
+
+	@media only screen and (max-width: 991px) {
+		width: 38.13rem;
+
+		&__header {
+			padding: 1rem;
+		}
+
+		&__title {
+			font-size: 1.25rem;
+		}
+
+		&__content {
+			padding: 1rem;
+		}
+
+		&__footer {
+			padding: 1rem;
+
+			.btn {
+				padding: 0.875rem 1rem;
+			}
+		}
+	}
+
+	/** Small devices **/
+	@media only screen and (max-width: 767px) {
+		width: 90vw;
+	}
+}
+
+.modal-dialog-scrollable .modal-content {
+	max-height: auto !important;
+}
+
+/**slide popup down in small devices**/
+@media only screen and (max-width: 575px) {
+	.modal-dialog-sm-end {
+		align-items: end;
+	}
+}

@@ -1,0 +1,21 @@
+/* =========================== Border ======================================*/
+//Border bottom last child
+.border-bottom--last-0 {
+	&:not(:last-child) {
+		border-bottom: 1px solid $border-color;
+	}
+}
+
+.border-top--first-0 {
+	&:not(:last-child) {
+		border-bottom: 1px solid $border-color;
+	}
+}
+
+.border-dashed {
+	border-style: dashed;
+}
+
+.border-input {
+	border: 1px solid $gray-400;
+}

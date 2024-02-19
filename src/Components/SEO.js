@@ -7,25 +7,29 @@ function SEO({ title = 'UrbanVista' }) {
 		<Helmet>
 			{ /* Standard metadata tags */}
 			<meta name="keywords" content="urbanvista, rent, sell, property, real estate" />
-			<meta name="author" content="Dev Aryan" />
-			<meta property="og:image" content="%PUBLIC_URL%/opengraph-img.jpg" />
-			<meta property="og:description" content="Single platform for buying and selling real estate" />
-			<meta name="twitter:description" content="Single platform for buying and selling real estate" />
-			<meta name='description' content="Single platform for buying and selling real estate" />
-			<meta name="twitter:creator" content="Dev Aryan" />
+			<meta name="author" content="Aryan Singh" />
 			<title>{title}</title>
-			{ /* End standard metadata tags */}
+			<meta name='description' content="Single platform for buying and selling real estate" />
 			{ /* Facebook tags */}
 			{/* <meta property="og:type" content={type} /> */}
 			<meta property="og:title" content={title} />
-			{ /* End Facebook tags */}
+			<meta property="og:description" content="Single platform for buying and selling real estate" />
+			<meta property="og:image" content="Assets/images/opengraph-img.jpg" />
+			<meta property="og:url" content="https://urbanvista.vercel.app/" />
+			<meta property="og:type" content="website" />
 			{ /* Twitter tags */}
 			<meta name="twitter:card" content="summary_large_image" />
-			{/* <meta name="twitter:card" content={type} /> */}
+			<meta name="twitter:description" content="Single platform for buying and selling real estate" />
 			<meta name="twitter:title" content={title} />
-			{ /* End Twitter tags */}
+			<meta name="twitter:image" content="Assets/images/opengraph-img.jpg" />
+			<meta name="twitter:creator" content="Aryan Singh" />
+			<meta property="twitter:domain" content="urbanvista.vercel.app" />
+			<meta property="twitter:url" content="https://urbanvista.vercel.app/" />
+			{/* <meta name="twitter:card" content={type} /> */}
 		</Helmet>
 	)
 }
 
 export default SEO
+
+

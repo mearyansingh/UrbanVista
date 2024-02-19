@@ -14,14 +14,14 @@ function SEO({ title = 'UrbanVista' }) {
 			{/* <meta property="og:type" content={type} /> */}
 			<meta property="og:title" content={title} />
 			<meta property="og:description" content="Single platform for buying and selling real estate" />
-			<meta property="og:image" content="Assets/images/opengraph-img.jpg" />
+			<meta property="og:image" content="https://urbanvista.vercel.app/Assets/images/opengraph-img.jpg" />
 			<meta property="og:url" content="https://urbanvista.vercel.app/" />
 			<meta property="og:type" content="website" />
 			{ /* Twitter tags */}
 			<meta name="twitter:card" content="summary_large_image" />
 			<meta name="twitter:description" content="Single platform for buying and selling real estate" />
 			<meta name="twitter:title" content={title} />
-			<meta name="twitter:image" content="Assets/images/opengraph-img.jpg" />
+			<meta name="twitter:image" content="https://urbanvista.vercel.app/Assets/images/opengraph-img.jpg" />
 			<meta name="twitter:creator" content="Aryan Singh" />
 			<meta property="twitter:domain" content="urbanvista.vercel.app" />
 			<meta property="twitter:url" content="https://urbanvista.vercel.app/" />

@@ -204,41 +204,45 @@ function CreateListing() {
 	// "REQUEST_DENIED"
 	/**function to handle onChange  */
 	const onMutate = (e) => {
-		// console.log(e.target.id, e.target.value)
-		let boolean = null
+		let value;
 
-		if (e.target.value === 'true') {
-			boolean = true
+		if (e.target.value === 'true' || e.target.value === 'false') {
+			value = e.target.value === 'true';
+		} else {
+			// Handle other input types (text/numbers) or file inputs
+			value = e.target.files ? e.target.files : e.target.value;
 		}
-		if (e.target.value === 'false') {
-			boolean = false
-		}
-		// Files
-		if (e.target.files) {
-			setFormData((prevState) => ({
-				...prevState,
-				images: e.target.files,
-			}))
-		}
-		// Text/Booleans/Numbers
-		// if (!e.target.files) {
-		// 	setFormData((prevState) => ({
-		// 		...prevState,
-		// 		[e.target.id]: boolean ?? parseFloat(e.target.value),
-		// 	}))
-		// }
 
-		if (!e.target.files) {
-			const value = e.target.value.trim(); // Trim any leading or trailing whitespaces
-			const numericValue = isNaN(value) ? null : parseFloat(value);
-
-			setFormData((prevState) => ({
-				...prevState,
-				[e.target.id]: boolean ?? numericValue,
-				address: e.target.id === 'address' ? value : prevState.address, // Ensure 'address' is never null
-			}));
-		}
+		setFormData((prevState) => ({
+			...prevState,
+			[e.target.id]: value,
+		}));
 	};
+
+	// const onMutate = (e) => {
+	// 	let boolean = null
+
+	// 	if (e.target.value === 'true') {
+	// 		boolean = true
+	// 	}
+	// 	if (e.target.value === 'false') {
+	// 		boolean = false
+	// 	}
+	// 	// Files
+	// 	if (e.target.files) {
+	// 		setFormData((prevState) => ({
+	// 			...prevState,
+	// 			images: e.target.files,
+	// 		}))
+	// 	}
+	// 	Text / Booleans / Numbers
+	// 	if (!e.target.files) {
+	// 		setFormData((prevState) => ({
+	// 			...prevState,
+	// 			[e.target.id]: boolean ?? parseFloat(e.target.value),
+	// 		}))
+	// 	}
+	// };
 
 	return (
 		<>
@@ -344,6 +348,7 @@ function CreateListing() {
 													</Button>
 													<Button
 														variant={!parking && parking !== null ? "success" : "light"}
+														// variant={!parking ? "success" : "light"}
 														type='button'
 														id='parking'
 														value={false}
@@ -434,9 +439,7 @@ function CreateListing() {
 														Yes
 													</Button>
 													<Button
-														variant={
-															!offer && offer !== null ? 'success' : 'light'
-														}
+														variant={!offer && offer !== null ? 'success' : 'light'}
 														type='button'
 														id='offer'
 														value={false}
@@ -497,9 +500,10 @@ function CreateListing() {
 												<div className="custom-upload">
 													<Form.Control type="file" id='images' max='6' accept='.jpg,.png,.jpeg' required multiple onChange={onMutate} className="custom-upload__input" />
 													<Form.Label className={`custom-upload__label mb-0 text-truncate `} data-label="Browse">
-														Choose files
+														{images ? `${images.length} images selected` : "Choose files"}
 													</Form.Label>
 												</div>
+												<Form.Text id="regularPriceHelpBlock" muted><i className="bi bi-info-circle me-5"></i>Images should be less then 2MB.</Form.Text>
 											</Form.Group>
 											<Button type='submit' variant="success" className="w-100">
 												Create Listing

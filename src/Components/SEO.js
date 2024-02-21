@@ -8,6 +8,7 @@ function SEO({ title = 'UrbanVista' }) {
 	return (
 		<Helmet>
 			{ /* Standard metadata tags */}
+			<link rel='canonical' href="https://urbanvista.vercel.app/" />
 			<meta name="keywords" content="urbanvista, rent, sell, property, real estate" />
 			<meta name="author" content="Aryan Singh" />
 			<title>{title}</title>

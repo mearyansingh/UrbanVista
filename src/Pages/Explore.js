@@ -23,17 +23,17 @@ function Explore() {
 					<Row className="g-30 custom-animate-fadeup">
 						<Col sm="6">
 							<Card as={Link} to="/category/rent" className="overflow-hidden bg-dark text-white h-100 shadow-sm">
-								<Card.Img src={rentCategoryImage} alt="rent" className="overlay-img object-fit-cover h-100" />
-								<Card.ImgOverlay className="d-flex align-items-center justify-content-center" >
-									<Card.Title as="p" className="fs-24">Places for rent</Card.Title>
+								<Card.Img src={rentCategoryImage} alt="Rent" className="overlay-img object-fit-cover h-100" />
+								<Card.ImgOverlay className="d-flex align-items-center justify-content-center h-100" >
+									<Card.Title as="p" className="fs-24 mb-0">Places for rent</Card.Title>
 								</Card.ImgOverlay>
 							</Card>
 						</Col>
 						<Col sm="6">
 							<Card as={Link} to="/category/sell" className="overflow-hidden bg-dark text-white h-100 shadow-sm">
-								<Card.Img src={sellCategoryImage} alt="sell" className="overlay-img object-fit-cover h-100" />
-								<Card.ImgOverlay className="d-flex align-items-center justify-content-center" >
-									<Card.Title as="p" className="fs-24">Places for sell</Card.Title>
+								<Card.Img src={sellCategoryImage} alt="Sell" className="overlay-img object-fit-cover h-100" />
+								<Card.ImgOverlay className="d-flex align-items-center justify-content-center h-100" >
+									<Card.Title as="p" className="fs-24 mb-0">Places for sell</Card.Title>
 								</Card.ImgOverlay>
 							</Card>
 						</Col>

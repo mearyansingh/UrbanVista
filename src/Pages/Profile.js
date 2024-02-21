@@ -203,8 +203,8 @@ function Profile() {
 							<Row className="g-20 custom-animate-fadeup">
 								{listings && listings?.map(listing => (
 									<Col md={6} lg={4} xl={3} key={listing.id}>
-										<Card className="overflow-hidden h-100 shadow-sm category-card">
-											<Card.Img variant="top" className="object-fit-cover h-100" src={listing.data.imgUrls[0]} />
+										<Card className="overflow-hidden  shadow-sm category-card">
+											<Card.Img loading="lazy" variant="top" alt={listing?.data?.name} className="object-fit-cover h-100 w-100" src={listing.data.imgUrls[0]} style={{ maxHeight: "250px", minHeight: "250px" }} />
 											<Card.Body>
 												<p className="fw-bold mb-5">{listing.data.name}</p>
 												<small className="mb-0 d-block mb-5">{listing.data.location}</small>

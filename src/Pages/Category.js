@@ -108,7 +108,8 @@ function Category() {
 							{listings && listings?.map(listing => (
 								<Col md={6} lg={4} key={listing.id}>
 									<Card as={Link} to={`/category/${listing.data.type}/${listing?.id}`} className="category-card overflow-hidden shadow-sm h-100">
-										<Card.Img variant="top" className="object-fit-cover h-100 " src={listing?.data?.imgUrls[0]} alt={listing?.data?.name} />
+										{/* <Card.Img variant="top" className="object-fit-cover h-100 " src={listing?.data?.imgUrls[0]} alt={listing?.data?.name} /> */}
+										<Card.Img variant="top" alt={listing?.data?.name} className="object-fit-cover h-100 w-100" src={listing.data.imgUrls[0]} style={{ maxHeight: "250px", minHeight: "250px" }} />
 										<Card.Body>
 											<p className="fw-bold mb-5">{listing.data.name}</p>
 											<small className="mb-0 d-block mb-5">{listing.data.location}</small>

@@ -94,9 +94,7 @@
 	--bs-form-invalid-color: #f39a9a;
 	--bs-form-invalid-border-color: #f39a9a;
 
-
-	// #11263C
-
+	//component wise styling
 	.card {
 		--bs-card-bg: #212529;
 	}
@@ -122,5 +120,19 @@
 
 	.form-label {
 		color: var(--bs-body-color);
+	}
+
+	.custom-loader {
+		&--v2 {
+
+			background-color: rgb(0 0 0 / 80%);
+
+			.loader {
+
+				.dot {
+					background-color: var(--bs-success)
+				}
+			}
+		}
 	}
 }

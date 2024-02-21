@@ -1,12 +1,40 @@
-# House Marketplace
+# UrbanVista
+
+# Description
 
 Find and list houses for sale or for rent. This is a React / Firebase v9 project from the React Front To Back 2022 course.
+
+![Thumbnail](https://github.com/mearyansingh/public/urbanvista-thumbnail.png)
 
 ## Usage
 
 ### Geolocation
 
-The listings use Google geocoding to get the coords from the address field. You need to either rename .env.example to .env and add your Google Geocode API key OR in the **CreateListing.jsx** file you can set **geolocationEnabled** to "false" and it will add a lat/lng field to the form.
+The listings use Google geocoding to get the coords from the address field. You need to either rename .env.example to .env and add your Google Geocode API key OR in the **CreateListing.js** file you can set **geolocationEnabled** to "false" and it will add a lat/lng field to the form.
+
+## Demo
+
+You can also clone the project and open it in localhost, or enjoy the preview
+video below instead :smile:
+
+https://user-images.githubusercontent.com/54622834/127658950-b1964a1c-dfc3-4853-be04-9c14a35f569c.mov
+
+
+## Prerequisits
+
+Before cloning/forking this project, make sure you have the following tools installed:
+
+- [Git](https://git-scm.com/downloads)
+- [NodeJS](https://nodejs.org/en/download/)
+
+## Installation
+
+1. Fork the project
+2. Clone the project
+3. Follow the instructions in the console:
+4. Navigate to the project directory cd sos-animals
+5. Install the dependencies npm install
+6. Run the project npm start
 
 ### Run
 
@@ -84,3 +112,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Contributors
+
+[//]: contributor-faces
+
+<a href="https://github.com/mearyansingh"><img src="https://avatars.githubusercontent.com/u/68269008?v=4" title="Aryan Singh" width="80" height="80"></a>
+
+[//]: contributor-faces
+

@@ -112,7 +112,7 @@ const CustomNavbar = () => {
 						))}
 					</Nav>
 					<Dropdown>
-						<Dropdown.Toggle variant=" " size="sm" className="fw-bold d-flex align-items-center border-0 justify-content-center p-0 gap-5 text-dark">
+						<Dropdown.Toggle variant=" " size="sm" aria-label="Theme toggler" className="fw-bold d-flex align-items-center border-0 justify-content-center p-0 gap-5 text-dark">
 							{getIcon(selectedTheme)}<span className="d-none d-lg-block">{selectedTheme === 'auto' ? 'Auto' : `${selectedTheme.charAt(0).toUpperCase()}${selectedTheme.slice(1)}`}</span>
 						</Dropdown.Toggle>
 						<Dropdown.Menu>

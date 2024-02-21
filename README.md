@@ -4,7 +4,7 @@
 
 Find and list houses for sale or for rent. This is a React / Firebase v9 project from the React Front To Back 2022 course.
 
-![Thumbnail](https://github.com/mearyansingh/public/urbanvista-thumbnail.png)
+![Thumbnail](https://github.com/mearyansingh/UrbanVista/blob/master/public/urbanvista-thumbnail.png)
 
 ## Usage
 

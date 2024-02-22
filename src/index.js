@@ -1,21 +1,21 @@
 import React from "react";
 import { createRoot } from 'react-dom/client';
-import { HelmetProvider } from 'react-helmet-async';
+// import { HelmetProvider } from 'react-helmet-async';
 import App from "./App";
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from "./reportWebVitals";
 import './Assets/style';
 import { auth, db } from "./firebase.config";
-import SEO from "Components/SEO";
+// import SEO from "Components/SEO";
 
 const root = createRoot(document.getElementById("root"));
-const helmetContext = {};
+// const helmetContext = {};
 root.render(
 	<React.StrictMode>
-		<HelmetProvider context={helmetContext}>
-			{/* <SEO /> */}
-			<App />
-		</HelmetProvider>
+		{/* <HelmetProvider context={helmetContext}> */}
+		{/* <SEO /> */}
+		<App />
+		{/* </HelmetProvider> */}
 	</React.StrictMode>
 );
 

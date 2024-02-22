@@ -4,11 +4,12 @@ import { Image, Container, Row, Col, Card, Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { collection, getDocs, query, where, orderBy, limit, startAfter } from "firebase/firestore";
 import { db } from "firebase.config";
-import Spinner from "Components/Spinners";
 import bedIcon from "Assets/images/svg/bedIcon.svg";
 import bathtubIcon from "Assets/images/svg/bathtubIcon.svg";
 import Header from "Components/LayoutComponents/Header";
 import SEO from "Components/SEO";
+import { ListEmptyPlaceholder, Loader } from "Components/GlobalComponents";
+import { formatIndianNumber } from "Services/helpers";
 
 function Category() {
 
@@ -30,7 +31,7 @@ function Category() {
 					listingRef,
 					where("type", "==", params?.categoryName),
 					orderBy("timestamp", "desc"),
-					limit(2)
+					limit(10)
 				);
 				//execute query
 				const querySnap = await getDocs(q);
@@ -91,6 +92,10 @@ function Category() {
 		}
 	};
 
+	if (loading) {
+		return <Loader loading />;
+	}
+
 	return (
 		<>
 			<SEO title={`${params.categoryName === "rent" ? "Places for rent" : "Places for sell"} | UrbanVista`} />
@@ -99,62 +104,82 @@ function Category() {
 					{params.categoryName === "rent" ? "Places for rent" : "Places for sell"}
 				</h2>
 			</Header>
-			{loading ? (
-				<Spinner />
-			) : listings && listings.length > 0 ? (
-				<main className="flex-grow-1 pt-15 mb-60 pb-40">
-					<Container>
-						<Row className="g-30 custom-animate-fadeup">
-							{listings && listings?.map(listing => (
-								<Col md={6} lg={4} key={listing.id}>
-									<Card as={Link} to={`/category/${listing.data.type}/${listing?.id}`} className="category-card overflow-hidden shadow-sm h-100">
-										{/* <Card.Img variant="top" className="object-fit-cover h-100 " src={listing?.data?.imgUrls[0]} alt={listing?.data?.name} /> */}
-										<Card.Img variant="top" alt={listing?.data?.name} className="object-fit-cover h-100 w-100" src={listing.data.imgUrls[0]} style={{ maxHeight: "250px", minHeight: "250px" }} />
-										<Card.Body>
-											<p className="fw-bold mb-5">{listing.data.name}</p>
-											<small className="mb-0 d-block mb-5">{listing.data.location}</small>
-											<small className="d-block mb-5">
-												Rs.&nbsp;
-												{listing.data.offer
-													? listing.data.discountedPrice
-														.toString()
-														.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-													: listing.data.regularPrice
-														.toString()
-														.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-												{listing.data.type === "rent" && " / Month"}
-											</small>
-											<div className="d-flex align-items-center gap-15">
-												<div className="d-flex align-items-center">
-													<Image fluid src={bedIcon} alt="Bedroom_img" width={30} height={30} />
-													<small className="ps-1 mb-0">
-														{listing.data.bedrooms > 1
-															? `${listing.data.bedrooms} Bedrooms`
-															: "1 Bedroom"}
-													</small>
+			<main className="flex-grow-1 pt-15 mb-60 pb-40">
+				<Container>
+					{listings?.length > 0 ? (
+						<>
+							<Row className="g-30 custom-animate-fadeup">
+								{listings?.map(listing => (
+									<Col md={6} lg={4} key={listing.id}>
+										<Card as={Link} to={`/category/${listing.data.type}/${listing?.id}`} className="category-card overflow-hidden shadow-sm h-100">
+											<Card.Img
+												loading="lazy"
+												variant="top"
+												alt={listing?.data?.name}
+												className="object-fit-cover h-100 w-100"
+												src={listing.data.imgUrls[0]}
+												style={{
+													maxHeight: "250px",
+													minHeight: "250px"
+												}}
+											/>
+											<Card.Body>
+												<p className="fw-bold mb-5">{listing.data.name}</p>
+												<small className="mb-0 d-block mb-5">{listing.data.location}</small>
+												{/* <small className="d-block mb-5">
+													Rs.&nbsp;
+													{listing.data.offer
+														? listing.data.discountedPrice
+															.toString()
+															.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+														: listing.data.regularPrice
+															.toString()
+															.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+													{listing.data.type === "rent" && " / Month"}
+												</small> */}
+												<small className="d-block mb-5">
+													Rs.&nbsp;
+													{listing.data.offer
+														? formatIndianNumber(listing.data.discountedPrice)
+														: formatIndianNumber(listing.data.regularPrice)
+													}
+													{listing.data.type === "rent" && " / Month"}
+												</small>
+												<div className="d-flex align-items-center gap-15">
+													<div className="d-flex align-items-center">
+														<Image fluid src={bedIcon} alt="Bedroom_img" width={30} height={30} />
+														<small className="ps-1 mb-0">
+															{listing.data.bedrooms > 1
+																? `${listing.data.bedrooms} Bedrooms`
+																: "1 Bedroom"}
+														</small>
+													</div>
+													<div className="d-flex align-items-center ">
+														<Image src={bathtubIcon} alt="Bathroom_img" width={30} height={30} />
+														<small className="ps-1 mb-0">
+															{listing.data.bathrooms > 1
+																? `${listing.data.bathrooms} Bathrooms`
+																: "1 Bathroom"}
+														</small>
+													</div>
 												</div>
-												<div className="d-flex align-items-center ">
-													<Image src={bathtubIcon} alt="Bathroom_img" width={30} height={30} />
-													<small className="ps-1 mb-0">
-														{listing.data.bathrooms > 1
-															? `${listing.data.bathrooms} Bathrooms`
-															: "1 Bathroom"}
-													</small>
-												</div>
-											</div>
-										</Card.Body>
-									</Card>
-								</Col>))}
-						</Row>
-						{lastFetchedListing &&
-							<Button variant="primary" type="button" className="mx-auto d-block mt-30" onClick={onFetchMoreListings}>Load More</Button>
-						}
-					</Container>
-				</main>
-			) : (
-				<p>No listing for {params.categoryName}</p>
-			)
-			}
+											</Card.Body>
+										</Card>
+									</Col>))}
+							</Row>
+							{lastFetchedListing &&
+								<Button variant="primary" type="button" className="mx-auto d-block mt-30" onClick={onFetchMoreListings}>Load More</Button>
+							}
+						</>
+					) : (
+						<Card className="custom-animate-fadeup">
+							<Card.Body>
+								<ListEmptyPlaceholder message={`Currently there is no listing for ${params.categoryName}`} contentWrapperClass="w-100-md px-30 px-md-0 w-50 mx-md-auto" />
+							</Card.Body>
+						</Card>
+					)}
+				</Container>
+			</main>
 		</ >
 	);
 }

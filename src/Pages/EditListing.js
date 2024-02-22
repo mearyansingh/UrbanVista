@@ -174,26 +174,24 @@ function EditListing() {
 						}
 					},
 					(error) => {
-						reject(error)
+						// A full list of error codes is available at
+						// https://firebase.google.com/docs/storage/web/handle-errors
+						switch (error.code) {
+							case 'storage/unauthorized':
+								// User doesn't have permission to access the object
+								reject(error)
+								break;
+							case 'storage/canceled':
+								// User canceled the upload
+								reject(error)
+								break;
+							case 'storage/unknown':
+								// Unknown error occurred, inspect error.serverResponse
+								reject(error)
+								break;
+							default:
+						}
 					},
-					// (error) => {
-					// 	// A full list of error codes is available at
-					// 	// https://firebase.google.com/docs/storage/web/handle-errors
-					// 	switch (error.code) {
-					// 		case 'storage/unauthorized':
-					// 			// User doesn't have permission to access the object
-					// 			break;
-					// 		case 'storage/canceled':
-					// 			// User canceled the upload
-					// 			break;
-
-					// 		// ...
-
-					// 		case 'storage/unknown':
-					// 			// Unknown error occurred, inspect error.serverResponse
-					// 			break;
-					// 	}
-					// },
 					() => {
 						// Upload completed successfully, now we can get the download URL
 						getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
@@ -203,32 +201,42 @@ function EditListing() {
 				);
 			})
 		}
-		const imgUrls = await Promise.all(
-			[...images].map((image) => storeImage(image))
-		).catch(() => {
+
+		try {
+			const imgUrls = await Promise.all(
+				[...images].map((image) => storeImage(image))
+			).catch(() => {
+				setLoading(false)
+				toast.error('Images not uploaded. Please make sure images size should be less than 2Mb or try again later.')
+				return
+			})
+
+			// console.log(imgUrls, "imgUrls")
+			const formDataCopy = {
+				...formData,
+				imgUrls,
+				geolocation,
+				timestamp: serverTimestamp()
+			}
+			formDataCopy.location = address
+			delete formDataCopy.images
+			delete formDataCopy.address
+			!formData.offer && delete formDataCopy.discountedPrice
+
+			//update the form
+			const docRef = doc(db, "listings", params.listingId)
+			await updateDoc(docRef, formDataCopy)
 			setLoading(false)
-			toast.error('Images not uploaded')
-			return
-		})
-
-		// console.log(imgUrls, "imgUrls")
-		const formDataCopy = {
-			...formData,
-			imgUrls,
-			geolocation,
-			timestamp: serverTimestamp()
+			toast.success('Listing Saved')
+			navigate(`/category/${formDataCopy.type}/${docRef.id}`)
+		} catch (error) {
+			setLoading(false);
+			setFormData((prevState) => ({
+				...prevState,
+				images: null,
+			}))
+			toast.error('Failed to save listing. Please try again.');
 		}
-		formDataCopy.location = address
-		delete formDataCopy.images
-		delete formDataCopy.address
-		!formData.offer && delete formDataCopy.discountedPrice
-
-		//update the form
-		const docRef = doc(db, "listings", params.listingId)
-		await updateDoc(docRef, formDataCopy)
-		setLoading(false)
-		toast.success('Listing Saved')
-		navigate(`/category/${formDataCopy.type}/${docRef.id}`)
 	};
 
 	// "REQUEST_DENIED"
@@ -507,16 +515,6 @@ function EditListing() {
 												<Form.Text className="d-block mt-0 mb-10">
 													The first image will be the cover (max 6).
 												</Form.Text>
-												{/* <Form.Control
-													type='file'
-													id='images'
-													onChange={onMutate}
-													max='6'
-													accept='.jpg,.png,.jpeg'
-													multiple
-													required
-													size="sm"
-												/> */}
 												<div className="custom-upload">
 													<Form.Control type="file" id='images' max='6' accept='.jpg,.png,.jpeg' required multiple onChange={onMutate} className="custom-upload__input" />
 													<Form.Label className={`custom-upload__label mb-0 text-truncate `} data-label="Browse">

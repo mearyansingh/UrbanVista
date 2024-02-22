@@ -82,9 +82,9 @@ function CreateListing() {
 	const onHandleSubmit = async (e) => {
 		e.preventDefault();
 		setLoading(true)
-		console.log(formData, "onHandleSubmit")
-		console.log(typeof discountedPrice, discountedPrice);
-		console.log(typeof regularPrice, regularPrice);
+		// console.log(formData, "onHandleSubmit")
+		// console.log(typeof discountedPrice, discountedPrice);
+		// console.log(typeof regularPrice, regularPrice);
 
 		/**Discounted price check */
 		if (discountedPrice >= regularPrice) {
@@ -94,9 +94,9 @@ function CreateListing() {
 		}
 
 		/**Images limit check */
-		if (images.length > 6) {
+		if (images?.length > 6) {
 			setLoading(false)
-			toast.error('Max 6 images')
+			toast.error('Max 6 images allowed.')
 			return
 		}
 
@@ -145,61 +145,74 @@ function CreateListing() {
 								break;
 						}
 					},
-					(error) => {
-						reject(error)
-					},
 					// (error) => {
-					// 	// A full list of error codes is available at
-					// 	// https://firebase.google.com/docs/storage/web/handle-errors
-					// 	switch (error.code) {
-					// 		case 'storage/unauthorized':
-					// 			// User doesn't have permission to access the object
-					// 			break;
-					// 		case 'storage/canceled':
-					// 			// User canceled the upload
-					// 			break;
-
-					// 		// ...
-
-					// 		case 'storage/unknown':
-					// 			// Unknown error occurred, inspect error.serverResponse
-					// 			break;
-					// 	}
+					// 	toast.error('Image upload error: ' + error.message);
+					// 	reject(error)
 					// },
+					(error) => {
+						// A full list of error codes is available at
+						// https://firebase.google.com/docs/storage/web/handle-errors
+						switch (error.code) {
+							case 'storage/unauthorized':
+								// User doesn't have permission to access the object
+								// toast.error('Please make sure images size should be less than 2Mb or try again later.');
+								reject(error)
+								break;
+							case 'storage/canceled':
+								// User canceled the upload
+								break;
+
+							case 'storage/unknown':
+								// Unknown error occurred, inspect error.serverResponse
+								break;
+							default:
+						}
+					},
 					() => {
 						// Upload completed successfully, now we can get the download URL
 						getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
 							resolve(downloadURL);
-						});
+						})
 					}
 				);
 			})
 		}
-		const imgUrls = await Promise.all(
-			[...images].map((image) => storeImage(image))
-		).catch(() => {
+
+		try {
+			const imgUrls = await Promise.all(
+				[...images].map((image) => storeImage(image))
+			).catch(() => {
+				setLoading(false)
+				toast.error('Images not uploaded. Please make sure images size should be less than 2Mb or try again later.');
+				return
+			})
+
+			// console.log(imgUrls, "imgUrls")
+			const formDataCopy = {
+				...formData,
+				imgUrls,
+				geolocation,
+				timestamp: serverTimestamp()
+			}
+
+			formDataCopy.location = address
+			delete formDataCopy.images
+			delete formDataCopy.address
+			!formData.offer && delete formDataCopy.discountedPrice
+
+			const docRef = await addDoc(collection(db, "listings"), formDataCopy)
 			setLoading(false)
-			toast.error('Images not uploaded')
-			return
-		})
-
-		// console.log(imgUrls, "imgUrls")
-		const formDataCopy = {
-			...formData,
-			imgUrls,
-			geolocation,
-			timestamp: serverTimestamp()
+			toast.success('Listing Saved')
+			navigate(`/category/${formDataCopy.type}/${docRef.id}`)
+		} catch (error) {
+			setLoading(false);
+			setFormData((prevState) => ({
+				...prevState,
+				images: null,
+			}))
+			toast.error('Failed to save listing. Please try again.');
 		}
-		formDataCopy.location = address
-		delete formDataCopy.images
-		delete formDataCopy.address
-		!formData.offer && delete formDataCopy.discountedPrice
-
-		const docRef = await addDoc(collection(db, "listings"), formDataCopy)
-		setLoading(false)
-		toast.success('Listing Saved')
-		navigate(`/category/${formDataCopy.type}/${docRef.id}`)
-	};
+	}
 
 	// "REQUEST_DENIED"
 	/**function to handle onChange  */
@@ -348,7 +361,6 @@ function CreateListing() {
 													</Button>
 													<Button
 														variant={!parking && parking !== null ? "success" : "light"}
-														// variant={!parking ? "success" : "light"}
 														type='button'
 														id='parking'
 														value={false}
@@ -487,20 +499,10 @@ function CreateListing() {
 												<Form.Text className="d-block mt-0 mb-10">
 													The first image will be the cover (max 6).
 												</Form.Text>
-												{/* <Form.Control
-													type='file'
-													id='images'
-													onChange={onMutate}
-													max='6'
-													accept='.jpg,.png,.jpeg'
-													multiple
-													required
-													size="sm"
-												/> */}
 												<div className="custom-upload">
 													<Form.Control type="file" id='images' max='6' accept='.jpg,.png,.jpeg' required multiple onChange={onMutate} className="custom-upload__input" />
 													<Form.Label className={`custom-upload__label mb-0 text-truncate `} data-label="Browse">
-														{images ? `${images.length} images selected` : "Choose files"}
+														{images?.length ? `${images?.length} images selected` : "Choose files"}
 													</Form.Label>
 												</div>
 												<Form.Text id="regularPriceHelpBlock" muted><i className="bi bi-info-circle me-5"></i>Images should be less then 2MB.</Form.Text>

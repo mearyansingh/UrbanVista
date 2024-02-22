@@ -1,12 +1,10 @@
 import React from "react";
 import { createRoot } from 'react-dom/client';
 import { HelmetProvider } from 'react-helmet-async';
-import 'mapbox-gl/dist/mapbox-gl.css';
 import App from "./App";
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from "./reportWebVitals";
 import './Assets/style';
-import 'swiper/swiper-bundle.css'
 import { auth, db } from "./firebase.config";
 import SEO from "Components/SEO";
 

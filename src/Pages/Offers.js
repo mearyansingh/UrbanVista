@@ -17,13 +17,14 @@ import bathtubIcon from "Assets/images/svg/bathtubIcon.svg";
 import { ListEmptyPlaceholder, Loader } from "Components/GlobalComponents";
 import Header from "Components/LayoutComponents/Header";
 import SEO from "Components/SEO";
+import { formatIndianNumber } from "Services/helpers";
 
 function Offers() {
+
 	/**initial state */
 	const [listings, setListings] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [lastFetchedListing, setLastFetchedListing] = useState(null) //for pagination/load more
-
 
 	/**lifecycle hook */
 	useEffect(() => {
@@ -117,20 +118,27 @@ function Offers() {
 							<Row className="g-20">
 								{listings && listings?.map(listing => (
 									<Col md={6} lg={4} key={listing.id}>
-										<Card as={Link} to={`/category/${listing.data.type}/${listing?.id}`} className="overflow-hidden shadow-sm h-100">
-											<Card.Img variant="top" className="object-fit-cover h-100" src={listing?.data?.imgUrls[0]} alt={listing?.data?.name} />
+										<Card as={Link} to={`/category/${listing.data.type}/${listing?.id}`} className="category-card overflow-hidden shadow-sm h-100">
+											<Card.Img
+												loading="lazy"
+												variant="top"
+												className="object-fit-cover w-100 h-100"
+												src={listing?.data?.imgUrls[0]}
+												alt={listing?.data?.name}
+												style={{
+													maxHeight: "250px",
+													minHeight: "250px "
+												}}
+											/>
 											<Card.Body>
 												<p className="fw-bold mb-5">{listing.data.name}</p>
 												<small className="mb-0 d-block mb-5">{listing.data.location}</small>
 												<small className="d-block mb-5">
 													Rs.&nbsp;
 													{listing.data.offer
-														? listing.data.discountedPrice
-															.toString()
-															.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-														: listing.data.regularPrice
-															.toString()
-															.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+														? formatIndianNumber(listing.data.discountedPrice)
+														: formatIndianNumber(listing.data.regularPrice)
+													}
 													{listing.data.type === "rent" && " / Month"}
 												</small>
 												<div className="d-flex align-items-center gap-15">

@@ -11,6 +11,7 @@ import bedIcon from "Assets/images/svg/bedIcon.svg";
 import bathtubIcon from "Assets/images/svg/bathtubIcon.svg";
 import Header from "Components/LayoutComponents/Header";
 import SEO from "Components/SEO";
+import { formatIndianNumber } from "Services/helpers";
 
 function Profile() {
 
@@ -154,11 +155,11 @@ function Profile() {
 													<div
 														className="rounded-circle border border-dark border-3 d-flex align-items-center justify-content-center fs-28 fw-bold"
 														style={{ width: '70px', height: "70px" }} >
-														{name[0]}
+														{name[0].toUpperCase()}
 													</div>
 												</div>
 												<div className="flex-grow-1 ms-15">
-													<p className=" mb-5 fw-bold"><i className="bi bi-person-fill me-5"></i>{name}</p>
+													<p className=" mb-5 fw-bold text-capitalize "><i className="bi bi-person-fill me-5"></i>{name}</p>
 													<p className=""><i className="bi bi-envelope-at-fill me-5"></i>{email}</p>
 												</div>
 											</>
@@ -203,12 +204,22 @@ function Profile() {
 							<Row className="g-20 custom-animate-fadeup">
 								{listings && listings?.map(listing => (
 									<Col md={6} lg={4} xl={3} key={listing.id}>
-										<Card className="overflow-hidden  shadow-sm category-card">
-											<Card.Img loading="lazy" variant="top" alt={listing?.data?.name} className="object-fit-cover h-100 w-100" src={listing.data.imgUrls[0]} style={{ maxHeight: "250px", minHeight: "250px" }} />
+										<Card className="overflow-hidden shadow-sm category-card">
+											<Card.Img
+												loading="lazy"
+												variant="top"
+												alt={listing?.data?.name}
+												className="object-fit-cover h-100 w-100"
+												src={listing.data.imgUrls[0]}
+												style={{
+													maxHeight: "250px",
+													minHeight: "250px"
+												}}
+											/>
 											<Card.Body>
 												<p className="fw-bold mb-5">{listing.data.name}</p>
 												<small className="mb-0 d-block mb-5">{listing.data.location}</small>
-												<small className="d-block mb-5">
+												{/* <small className="d-block mb-5">
 													Rs&nbsp;
 													{listing.data.offer
 														? listing.data.discountedPrice
@@ -217,6 +228,14 @@ function Profile() {
 														: listing.data.regularPrice
 															.toString()
 															.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+													{listing.data.type === "rent" && " / Month"}
+												</small> */}
+												<small className="d-block mb-5">
+													Rs.&nbsp;
+													{listing.data.offer
+														? formatIndianNumber(listing.data.discountedPrice)
+														: formatIndianNumber(listing.data.regularPrice)
+													}
 													{listing.data.type === "rent" && " / Month"}
 												</small>
 												<div className="d-flex justify-content-between mb-10">

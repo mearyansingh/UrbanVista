@@ -9,8 +9,8 @@ import { getDoc, doc } from 'firebase/firestore'
 import { getAuth } from 'firebase/auth'
 import mapboxgl from 'mapbox-gl';
 import { db } from 'firebase.config'
-import Spinners from 'Components/Spinners'
-import { Tooltip } from 'Components/GlobalComponents';
+import { Loader, Tooltip } from 'Components/GlobalComponents';
+import { formatIndianNumber } from "Services/helpers";
 
 function Listing() {
 
@@ -50,7 +50,7 @@ function Listing() {
 	}, [navigate, params.listingId])
 
 	if (loading) {
-		return <Spinners />
+		return <Loader loading />
 	}
 
 	return (
@@ -84,21 +84,30 @@ function Listing() {
 			>
 				{listing?.imgUrls.map((url, index) => (
 					<SwiperSlide key={index}>
-						<Image fluid src={url} alt="property-gallery" width={500} height={500} />
+						<Image loading="lazy" fluid src={url} alt="property-gallery" width={500} height={500} />
 					</SwiperSlide>
 				))}
 			</Swiper>
 			<Container>
 				<div className='pt-15 mb-60 pb-40'>
 					<div className='mb-5'>
-						<h4 className='mb-5'>{listing?.name} - Rs.{listing?.offer ? listing?.discountedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : listing?.regularPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</h4>
+						<h4 className='mb-5'>
+							{/* {listing?.name} - Rs.{listing?.offer ?
+								listing?.discountedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') :
+								listing?.regularPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+							} */}
+							{listing?.name} - Rs.{listing?.offer ?
+								formatIndianNumber(listing.discountedPrice) :
+								formatIndianNumber(listing.regularPrice)
+							}
+						</h4>
 						<p className='mb-5 fw-semibold'>{listing?.location}</p>
 						<Badge bg='success' className='mb-5'>
 							For {listing?.type === 'rent' ? 'rent' : 'sell'}
 						</Badge>
 						{listing?.offer && (
 							<Badge bg='dark' className='ms-5'>
-								Rs&nbsp;{listing?.regularPrice - listing?.discountedPrice} discount
+								Rs&nbsp;{formatIndianNumber(listing?.regularPrice - listing?.discountedPrice)} discount
 							</Badge>
 						)}
 					</div>

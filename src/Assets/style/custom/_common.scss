@@ -80,34 +80,6 @@ a {
 	color: var(--#{$prefix}white);
 }
 
-.overflow-x-hidden {
-	overflow-x: hidden;
-}
-
-/* ===========================Common (Global style)======================================*/
-
-/**custom style text hover primary**/
-.text-hover--primary:hover {
-	color: var(--#{$prefix}primary);
-}
-
-.list-hover--primary {
-	&:hover * {
-		color: var(--#{$prefix}primary);
-	}
-}
-
-/**Capitalize first letter**/
-.txt-capitalize {
-	display: inline-block;
-
-	&:first-letter {
-		text-transform: capitalize;
-	}
-
-	text-transform: lowercase;
-}
-
 //Loader
 .custom-loader--v2 {
 	z-index: 1060;

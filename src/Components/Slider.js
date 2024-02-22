@@ -5,7 +5,8 @@ import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore'
 import { db } from 'firebase.config'
-import Spinners from 'Components/Spinners'
+import { Loader } from './GlobalComponents';
+import { formatIndianNumber } from "Services/helpers";
 
 function Slider() {
 
@@ -33,7 +34,7 @@ function Slider() {
 	}, [])
 
 	if (loading) {
-		return <Spinners />
+		return <Loader loading />
 	}
 
 	return (
@@ -59,7 +60,7 @@ function Slider() {
 									<div className='position-absolute top-0 start-0'>
 										{data?.name && <p className='bg-dark fw-semibold text-light opacity-75 px-10 py-5 mb-5'>{data.name}</p>}
 										<Badge bg="success"><i className="bi bi-tag me-5"></i>
-											Rs {data.discountedPrice ?? data.regularPrice}{' '}
+											Rs {formatIndianNumber(data.discountedPrice) ?? formatIndianNumber(data.regularPrice)}{' '}
 											{data.type === 'rent' && '/ month'}
 										</Badge>
 									</div>

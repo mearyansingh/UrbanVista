@@ -64,7 +64,6 @@ function ForgotPassword() {
 												>
 													<Form.Control
 														type="email"
-														// id="email"
 														value={email}
 														onChange={onChangeHandler}
 														placeholder="Email"

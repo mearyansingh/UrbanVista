@@ -1,6 +1,7 @@
 {
-	"name": "HouseMarketplace",
-	"short_name": "HouseMarketplace",
+	"name": "UrbanVista",
+	"short_name": "UrbanVista",
+	"description": "Rent or sell properties with ease.",
 	"icons": [
 		{
 			"src": "favicon.ico",
@@ -23,6 +24,5 @@
 	"start_url": ".",
 	"display": "standalone",
 	"theme_color": "#0dc49a",
-	"background_color": "#0dc49a",
-	"description": "Rent or sell properties with ease."
+	"background_color": "#0dc49a"
 }

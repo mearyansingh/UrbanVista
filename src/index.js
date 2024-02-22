@@ -13,7 +13,7 @@ const helmetContext = {};
 root.render(
 	<React.StrictMode>
 		<HelmetProvider context={helmetContext}>
-			<SEO />
+			{/* <SEO /> */}
 			<App />
 		</HelmetProvider>
 	</React.StrictMode>

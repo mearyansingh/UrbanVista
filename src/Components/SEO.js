@@ -26,7 +26,6 @@ function SEO({ title = 'UrbanVista' }) {
 			<meta name="twitter:title" content={title} />
 			<meta name="twitter:image" content={absoluteImagePath} />
 			<meta name="twitter:creator" content="Aryan Singh" />
-			<meta property="twitter:domain" content="urbanvista.vercel.app" />
 			<meta property="twitter:url" content="https://urbanvista.vercel.app/" />
 			{/* <meta name="twitter:card" content={type} /> */}
 		</Helmet>

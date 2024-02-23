@@ -259,7 +259,7 @@ function CreateListing() {
 
 	return (
 		<>
-			<SEO title="Create listing | UrbanVista" />
+			{/* <SEO title="Create listing | UrbanVista" /> */}
 			<Header>
 				<div className="d-flex align-items-center gap-15">
 					<Button className="" variant="link" onClick={() => navigate(-1)}><i className="bi bi-arrow-left-circle fs-24"></i></Button>

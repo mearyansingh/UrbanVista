@@ -98,7 +98,7 @@ function Category() {
 
 	return (
 		<>
-			<SEO title={`${params.categoryName === "rent" ? "Places for rent" : "Places for sell"} | UrbanVista`} />
+			{/* <SEO title={`${params.categoryName === "rent" ? "Places for rent" : "Places for sell"} | UrbanVista`} /> */}
 			<Header>
 				<h2 className="mb-0">
 					{params.categoryName === "rent" ? "Places for rent" : "Places for sell"}

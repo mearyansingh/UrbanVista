@@ -107,7 +107,7 @@ function Offers() {
 
 	return (
 		<>
-			<SEO title="Offers | UrbanVista" />
+			{/* <SEO title="Offers | UrbanVista" /> */}
 			<Header>
 				<h2 className="mb-0">Offers</h2>
 			</Header>

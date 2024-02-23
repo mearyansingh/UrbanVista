@@ -112,7 +112,7 @@ function Profile() {
 
 	return (
 		<>
-			<SEO title="Profile | UrbanVista" />
+			{/* <SEO title="Profile | UrbanVista" /> */}
 			<Header className="py-15">
 				<h2 className="mb-0">My Profile</h2>
 			</Header>

@@ -11,7 +11,7 @@ function Explore() {
 
 	return (
 		<>
-			<SEO title="Explore | UrbanVista" />
+			{/* <SEO title="Explore | UrbanVista" /> */}
 			<Header>
 				<h2 className="mb-0">Explore</h2>
 			</Header >

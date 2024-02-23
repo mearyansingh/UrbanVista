@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 // import ogImg from 'public/opengraph-img.jpg';
 
 function SEO({ title = 'UrbanVista' }) {
-	const absoluteImagePath = "https://urbanvista.vercel.app/Assets/images/opengraph-img.jpg";
+	// const absoluteImagePath = "https://urbanvista.vercel.app/Assets/images/opengraph-img.jpg";
 
 	return (
 		<Helmet>
@@ -11,7 +11,7 @@ function SEO({ title = 'UrbanVista' }) {
 			{/* <link rel='canonical' href="https://urbanvista.vercel.app/" />
 			<meta name="keywords" content="urbanvista, rent, sell, property, real estate" />
 			<meta name="author" content="Aryan Singh" /> */}
-			<title>{title}</title>
+			{/* <title>{title}</title> */}
 			{/* <meta name='description' content="Single platform for buying and selling real estate" /> */}
 			{ /* Facebook tags */}
 			{/* <meta property="og:type" content={type} /> */}
